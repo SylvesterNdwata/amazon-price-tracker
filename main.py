@@ -12,13 +12,17 @@ password = os.environ.get("password")
 to_addr = os.environ.get("recipient")
 
 url = "https://appbrewery.github.io/instant_pot/"
-response = requests.get("https://appbrewery.github.io/instant_pot/")
+
+header = {
+    "Accept-Language": "de-DE,de;q=0.9,en-DE;q=0.8,en-US;q=0.7,en;q=0.6",
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/144.0.0.0 Safari/537.36"
+}
+
+response = requests.get("https://appbrewery.github.io/instant_pot/", headers=header)
 
 web_content = response.text
 
 soup = BeautifulSoup(web_content, "html.parser")
-
-print(soup.title.get_text())
 
 price_element = soup.find("div", class_="a-section a-spacing-none a-spacing-top-micro _p13n-desktop-sims-fbt_fbt-desktop_display-flex__1gorZ")
 
